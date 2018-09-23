@@ -1,6 +1,7 @@
 package company.challenge;
 
 import company.challenge.client.OpenWeatherMapClient;
+import company.challenge.domain.CityInfo;
 import company.challenge.domain.DataUnit;
 import company.challenge.domain.OpenWeatherForecast;
 import company.challenge.domain.Telemetry;
@@ -13,11 +14,13 @@ import org.springframework.stereotype.Service;
 import java.time.*;
 import java.time.temporal.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
 import static java.lang.String.valueOf;
+import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
 
 @Slf4j
@@ -39,10 +42,11 @@ class OpenWeatherService {
 
     public ForecastDTO getForecast(String city) {
         OpenWeatherForecast forecast = openWeatherMapClient.getForecast(city, apiKey, valueOf(32));
-        log.info("Getting forecast for {}, {}", forecast.getCityInfo().getName(),
-                forecast.getCityInfo().getCountryCode());
+        log.info("Getting forecast for {}", ofNullable(forecast)
+                        .map(OpenWeatherForecast::getCityInfo)
+                .map(info -> info.getName() + ", " + info.getCountryCode()).orElse("Not known"));
 
-        return getForecastDTO(forecast.getList());
+        return getForecastDTO(requireNonNull(forecast).getList());
     }
 
     private ForecastDTO getForecastDTO(List<DataUnit> dataUnits) {
