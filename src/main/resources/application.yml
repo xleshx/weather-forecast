@@ -4,7 +4,10 @@ logging.level.company.challenge: INFO
 logging.level.org.springframework.web: ERROR
 
 api.key: f7ebbb02a7a69cb2bf74a9fa08abeb11
-open-weather-map.ribbon.listOfServers: localhost:80
+
+open-weather-map:
+  ribbon:
+    listOfServers: api.openweathermap.org:80
 
 spring:
   jackson:

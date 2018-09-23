@@ -6,15 +6,12 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.TimeZone;
 
-public class CustomDateSerializer extends JsonDeserializer<LocalDateTime> {
+public class CustomDateSerializer extends JsonDeserializer<Instant> {
 
     @Override
-    public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public Instant deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         final long timestamp = Long.parseLong(p.getValueAsString());
-                return LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp),
-                        TimeZone.getDefault().toZoneId());
+                return Instant.ofEpochSecond(timestamp);
     }
 }

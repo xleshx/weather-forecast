@@ -5,13 +5,13 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Data
 public class DataUnit {
     @JsonProperty("dt")
     @JsonDeserialize(using = CustomDateSerializer.class)
-    private LocalDateTime dt;
+    private Instant dt;
 
     @JsonProperty("main")
     @Valid

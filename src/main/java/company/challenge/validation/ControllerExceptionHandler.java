@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.ValidationException;
+
 @Slf4j
 @ControllerAdvice
 public class ControllerExceptionHandler {
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @ExceptionHandler({MethodArgumentNotValidException.class})
-    public void handleConflict(MethodArgumentNotValidException e) {
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler({ValidationException.class, MethodArgumentNotValidException.class})
+    public void handleConflict(Exception e) {
         log.debug(e.getMessage());
     }
 }

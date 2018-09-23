@@ -11,6 +11,9 @@ import java.util.List;
 public class OpenWeatherForecast {
     @Valid
     @JsonProperty("list")
-    List<DataUnit> list =  new ArrayList<>();
+    private List<DataUnit> list =  new ArrayList<>();
+
+    @JsonProperty("city")
+    private CityInfo cityInfo;
 
 }

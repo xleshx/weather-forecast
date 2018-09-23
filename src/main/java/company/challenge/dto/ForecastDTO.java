@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ForecastDTO {
-    double threeDaysDailyAverageMinorUnits;
-    double threeDaysNightlyAverageMinorUnits;
-    double threeDaysPressureAverageMinorUnits;
+    double threeDaysDailyAverage;
+    double threeDaysNightlyAverage;
+    double threeDaysPressureAverage;
 }
