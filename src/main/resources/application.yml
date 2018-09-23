@@ -1,0 +1,12 @@
+# logging
+logging.level.root: ERROR
+logging.level.company.challenge: INFO
+logging.level.org.springframework.web: ERROR
+
+api.key: f7ebbb02a7a69cb2bf74a9fa08abeb11
+open-weather-map.ribbon.listOfServers: localhost:80
+
+spring:
+  jackson:
+    joda-date-time-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+    serialization.write_dates_as_timestamps: true

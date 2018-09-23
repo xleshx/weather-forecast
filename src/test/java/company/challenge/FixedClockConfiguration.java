@@ -13,6 +13,6 @@ public class FixedClockConfiguration {
 
     @Bean
     public Clock getSystemClock() {
-        return Clock.fixed(parse("2018-03-18T12:00:00Z"), UTC);
+        return Clock.fixed(parse("2018-09-23T12:00:00Z"), UTC);
     }
 }

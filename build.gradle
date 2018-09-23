@@ -4,6 +4,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
     }
 }
 
@@ -30,11 +31,46 @@ targetCompatibility = 1.11
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    compile 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon'
     testCompile("junit:junit")
     testCompile 'org.mockito:mockito-core:2.16.0'
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile "com.github.tomakehurst:wiremock:2.19.0"
 }
+
 
 lombok {
     version = "1.18.2"
 }
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-openfeign:2.0.1.RELEASE'
+        mavenBom 'org.springframework.cloud:spring-cloud-netflix:2.0.1.RELEASE'
+    }
+}
+
+
+//
+//
+//buildscript {
+//    dependencies {
+//        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+//    }
+//}
+//
+//apply plugin: "io.spring.dependency-management"
+//
+//dependencyManagement {
+//    imports {
+//        mavenBom 'org.springframework.cloud:spring-cloud-openfeign:2.0.2.BUILD-SNAPSHOT'
+//    }
+//}
+//dependencies {
+//    compile 'org.springframework.cloud:spring-cloud-starter-openfeign'
+//}repositories {
+//    maven {
+//        url 'https://repo.spring.io/libs-snapshot'
+//    }
+//}
