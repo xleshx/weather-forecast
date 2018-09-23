@@ -1,10 +1,12 @@
 ### What is this repository for? ###
-Simple service built on Spring stack which returns statistics calculated for the last 60 seconds
+Simple service built on Spring stack which returns average temperature and pressure 
 
 ### Run ###
-export JAVA_HOME=/usr/local/jdk-11.jdk/Contents/Home/
-./gradlew clean build && java -jar build/libs/statistics-svc-0.1.0.jar
-
+````
+# export JAVA_HOME=/usr/local/jdk-11.jdk/Contents/Home/
+export JAVA_HOME={PATH_TO_YOUR_JAVA11_SDK}
+./gradlew clean build && java -jar build/libs/weather-forecast-0.0.1.jar
+````
 
 ### Check the code ###
 
