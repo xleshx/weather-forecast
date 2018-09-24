@@ -1,7 +1,6 @@
 package company.challenge;
 
 import company.challenge.client.OpenWeatherMapClient;
-import company.challenge.domain.CityInfo;
 import company.challenge.domain.DataUnit;
 import company.challenge.domain.OpenWeatherForecast;
 import company.challenge.domain.Telemetry;
@@ -9,12 +8,12 @@ import company.challenge.dto.ForecastDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
-import java.time.temporal.*;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
@@ -40,10 +39,10 @@ class OpenWeatherService {
         this.openWeatherMapClient = openWeatherMapClient;
     }
 
+    @Cacheable("forecasts")
     public ForecastDTO getForecast(String city) {
         OpenWeatherForecast forecast = openWeatherMapClient.getForecast(city, apiKey, valueOf(32));
-        log.info("Getting forecast for {}", ofNullable(forecast)
-                        .map(OpenWeatherForecast::getCityInfo)
+        log.info("Getting forecast for {} from remote service", ofNullable(forecast).map(OpenWeatherForecast::getCityInfo)
                 .map(info -> info.getName() + ", " + info.getCountryCode()).orElse("Not known"));
 
         return getForecastDTO(requireNonNull(forecast).getList());

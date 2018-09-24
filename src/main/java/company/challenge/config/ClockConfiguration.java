@@ -1,4 +1,4 @@
-package company.challenge;
+package company.challenge.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
